@@ -1,0 +1,52 @@
+{
+  "name": "express-ts-drizzle-starter",
+  "version": "1.0.0",
+  "description": "Express TypeScript starter template with Drizzle ORM, Docker, rate limiting, and clean architecture.",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
+  },
+  "keywords": [
+    "express",
+    "typescript",
+    "starter",
+    "boilerplate",
+    "drizzle",
+    "drizzle-orm",
+    "postgres",
+    "docker",
+    "express-starter",
+    "express-typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.0",
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^25.6.0",
+    "drizzle-kit": "^0.30.6",
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.3.2",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1",
+    "postgres": "^3.4.9",
+    "zod": "^4.3.6"
+  }
+}
