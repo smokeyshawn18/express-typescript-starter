@@ -10,10 +10,18 @@ const app = express();
 
 app.disable("x-powered-by");
 app.use(helmet());
-app.use(cors());
-app.use(morgan("dev"));
+app.use(
+  cors({
+    origin: ["http://your-frontend-domain.com", "http://localhost:3000"], // Replace with your frontend's origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  }),
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(morgan("dev"));
 app.use(apiRateLimiter);
 app.use("/api", routes);
 app.use(notFoundHandler);

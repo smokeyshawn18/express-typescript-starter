@@ -1,30 +1,23 @@
 import type { NextFunction, Request, Response } from "express";
-import { env } from "../config";
-import { AppError } from "./error.middleware";
+import { fromNodeHeaders } from "better-auth/node";
+import { auth } from "../config/auth";
 
-export const requireAuth = (
+export const requireAuth = async (
   req: Request,
-  _res: Response,
+  res: Response,
   next: NextFunction,
 ) => {
-  if (!env.AUTH_TOKEN) {
-    next();
-    return;
+  try {
+    const session = await auth.api.getSession({
+      headers: fromNodeHeaders(req.headers),
+    });
+
+    if (!session) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    return next();
+  } catch {
+    return res.status(401).json({ message: "Invalid session" });
   }
-
-  const authorization = req.header("authorization");
-
-  if (!authorization?.startsWith("Bearer ")) {
-    next(new AppError("Missing authorization token", 401));
-    return;
-  }
-
-  const token = authorization.slice("Bearer ".length).trim();
-
-  if (token !== env.AUTH_TOKEN) {
-    next(new AppError("Invalid authorization token", 401));
-    return;
-  }
-
-  next();
 };

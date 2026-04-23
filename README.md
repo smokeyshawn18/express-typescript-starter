@@ -1,6 +1,6 @@
 # Express TypeScript Starter (Drizzle + Docker)
 
-A production-ready **Express + TypeScript starter** with clean folder structure, Drizzle ORM, PostgreSQL, Docker, rate limiting, and environment validation.
+A production-ready **Express + TypeScript starter** with clean folder structure, Better-Auth, Drizzle ORM, PostgreSQL, Docker, rate limiting, and environment validation.
 
 If you searched for **"express ts starter"**, this repository is exactly that.
 
@@ -71,7 +71,8 @@ PORT=4000
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/educrud
 RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX_REQUESTS=100
-AUTH_TOKEN=dev-secret-token
+BETTER_AUTH_SECRET=dev-secret-token
+BETTER_AUTH_URL=http://localhost:3000 # Base URL of your app
 ```
 
 ### 3. Run in development
@@ -85,7 +86,10 @@ Server runs at `http://localhost:4000`.
 ## API Endpoints
 
 - `GET /api/health`
-- `GET /api/users`
+- `POST /api/users/otp/send`
+- `POST /api/users/otp/verify`
+- `GET /api/users/me`
+- `PATCH /api/users/me`
 
 ## Drizzle Commands
 
